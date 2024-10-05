@@ -1,0 +1,23 @@
+<div class="comment-section">
+  <h3>Comments for {{ imageTitle }}</h3>
+  <textarea [(ngModel)]="newComment" placeholder="Write a comment"></textarea>
+  <button (click)="addComment()">Add Comment</button>
+  <ul>
+      <li *ngFor="let comment of comments">
+          <div class="comment">
+              <strong>Comment:</strong> {{ comment.text }}
+              <div class="reply-input">
+                  <textarea [(ngModel)]="replyTexts[comment._id]" placeholder="Write a reply"></textarea>
+                  <button (click)="addReply(comment)">Reply</button>
+              </div>
+              <ul *ngIf="comment.replies && comment.replies.length">
+                  <li *ngFor="let reply of comment.replies">
+                      <div class="comment">
+                          <strong>Reply:</strong> {{ reply.text }}
+                      </div>
+                  </li>
+              </ul>
+          </div>
+      </li>
+  </ul>
+</div>

@@ -1,0 +1,14 @@
+<p-carousel *ngIf="images.length > 0" [value]="images" [numVisible]="5" [numScroll]="1">
+    <ng-template pTemplate="item" let-image>
+        <div class="image-container" (click)="showComments(image)">
+            <img [src]="image.url" alt="{{ image.filename }}" class="image-thumbnail" />
+            <h4>{{ image.filename }}</h4>
+            <p>{{ image.description }}</p>
+        </div>
+    </ng-template>
+</p-carousel>
+
+  
+<p-dialog header="Comments" [(visible)]="displayComments" [modal]="true" [style]="{ width: '50vw' }" (onHide)="closeComments()">
+    <app-comment-view *ngIf="selectedImage" [imageId]="selectedImage._id" [imageTitle]="selectedImage.filename"></app-comment-view>
+</p-dialog>

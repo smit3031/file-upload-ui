@@ -1,0 +1,29 @@
+
+<app-file-table></app-file-table>
+<div>
+  <h2>Drag and Drop File Upload</h2>
+
+  <!-- PrimeNG File Upload Component -->
+  <p-fileUpload 
+    name="files[]" 
+    [multiple]="true" 
+    mode="advanced" 
+    [customUpload]="true" 
+    (uploadHandler)="onPrimeNGUpload($event)">
+</p-fileUpload>
+
+  <!-- File Upload Status Table -->
+  <h3>Upload Status</h3>
+  <ul>
+    <li *ngFor="let fileStatus of selectedFiles">
+      <p>{{ fileStatus.file.name }} - {{ fileStatus.progress }}% </p>
+      <p-progressBar [value]="fileStatus.progress"></p-progressBar>
+
+      <!-- Retry button for failed uploads -->
+      <button *ngIf="fileStatus.error" (click)="retryFileUpload(fileStatus)">Retry</button>
+    </li>
+  </ul>
+
+  <!-- Upload Button -->
+  <button (click)="uploadAll()">Upload All</button>
+</div>
